@@ -1,7 +1,7 @@
 terraform {
     backend "s3" {
       bucket = "honey-aws-terraform"
-      key = "honeyterraform"
+      key = "s3://honey-aws-terraform/honeyterraform"
       region = "ca-central-1"
     }
 }
