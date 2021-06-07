@@ -1,6 +1,5 @@
 #resource for creating an independent Instance
 resource "aws_instance" "First_Instance" {
-  name = "InstancewithSG"
   description = "An Instance built using Terrafrom"
   ami = "ami-0277fbe7afa8a33a6"
   instance_type = "t2.micro"
