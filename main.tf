@@ -34,18 +34,18 @@ resource "aws_instance" "First_Instance" {
 # }
 
 #resource for creating a Storage S3 Bucket
-# resource "aws_s3_bucket" "Bucket1" {
-#   bucket = "honeys-terraform-bucket"
-#   acl = "private"
+resource "aws_s3_bucket" "Bucket1" {
+  bucket = "honeys-terraform-bucket"
+  acl = "private"
 
-#   tags = {
-#     Name = "terraform-honey"
-#   }
+  tags = {
+    Name = "terraform-honey"
+  }
 
-#   versioning {
-#     enabled = true
-#   }
-# }
+  versioning {
+    enabled = true
+  }
+}
 
 provider "aws" {
   region = var.region
