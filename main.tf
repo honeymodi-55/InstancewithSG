@@ -10,26 +10,26 @@ resource "aws_instance" "First_Instance" {
 
 
 #resource for creating an independent security group
-# resource "aws_security_group" "SG_Honey" {
-#  name = "SG_Honey"
-#  ingress {
-#     cidr_blocks = [ "99.227.118.13/32" ]
-#     from_port = 8080
-#     to_port = 8080
-#     protocol = "tcp"
-#   } 
+resource "aws_security_group" "SG_Honey" {
+ name = "SG_Honey"
+ ingress {
+    cidr_blocks = [ "99.227.118.13/32" ]
+    from_port = 8080
+    to_port = 8080
+    protocol = "tcp"
+  } 
 
-#   egress {
-#     cidr_blocks = [ "0.0.0.0/0" ]
-#     from_port = 0
-#     to_port = 0
-#     protocol = "-1"
-#   }
+  egress {
+    cidr_blocks = [ "0.0.0.0/0" ]
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+  }
 
-#   tags = {
-#     Name = "terraform-honey"
-#   }  
-# }
+  tags = {
+    Name = "terraform-honey"
+  }  
+}
 
 #resource for creating a Storage S3 Bucket
 resource "aws_s3_bucket" "Bucket1" {
@@ -44,6 +44,13 @@ resource "aws_s3_bucket" "Bucket1" {
     enabled = true
   }
 }
+
+#creating a connection between the security group and instance
+resource "aws_network_interface_sg_attachment" "ConnectiontoSG" {
+  security_group_id = aws_security_group.SG_Honey.id
+  network_interface_id = aws_instance.First_Instance.primary_network_interface_id
+}
+
 
   provider "aws" {
   region = var.region
