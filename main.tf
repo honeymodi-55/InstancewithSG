@@ -13,6 +13,7 @@ resource "aws_instance" "apache_instance" {
   ami = "ami-0277fbe7afa8a33a6"
   instance_type = "t2.micro"
   key_name = "trail-key"
+  security_groups = [ aws_security_group.SG_Honey.id ]
   tags = {
       Name = "apache"
       }
@@ -22,15 +23,11 @@ resource "aws_instance" "apache_instance" {
 resource "aws_security_group" "SG_Honey" {
  name = "SG_Honey"  
 
-#  lifecycle {
-#    create_before_destroy = true
-#  }
-
  ingress {
     cidr_blocks = [ "99.227.118.13/32" ]
     from_port = 8080
     to_port = 8080
-    protocol = "tcp"
+    protocol = "tcp"  
   } 
 
   egress {
@@ -43,6 +40,15 @@ resource "aws_security_group" "SG_Honey" {
   tags = {
     Name = "terraform-honey"
   }  
+}
+
+resource "aws_security_group_rule" "port_22_rule" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["sg-04467a714596c39ed"] #source security group
+  security_group_id = aws_security_group.SG_Honey.id  #destiantion
 }
 
 #resource for creating a Storage S3 Bucket
@@ -63,11 +69,6 @@ resource "aws_s3_bucket" "Bucket1" {
 resource "aws_network_interface_sg_attachment" "ConnectiontoSG" {
   security_group_id = aws_security_group.SG_Honey.id
   network_interface_id = aws_instance.First_Instance.primary_network_interface_id
-}
-
-resource "aws_network_interface_sg_attachment" "connection_to_apache" {
-  security_group_id = aws_security_group.SG_Honey.id
-  network_interface_id = aws_instance.apache_instance.primary_network_interface_id
 }
 
   provider "aws" {
