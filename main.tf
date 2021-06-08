@@ -8,6 +8,15 @@ resource "aws_instance" "First_Instance" {
       }
 }
 
+#resource for creating a new Instance
+resource "aws_instance" "apache_instance" {
+  ami = "ami-0277fbe7afa8a33a6"
+  instance_type = "t2.micro"
+  key_name = "trail-key"
+  tags = {
+      Name = "apache"
+      }
+}
 
 #resource for creating an independent security group
 resource "aws_security_group" "SG_Honey" {
@@ -56,6 +65,10 @@ resource "aws_network_interface_sg_attachment" "ConnectiontoSG" {
   network_interface_id = aws_instance.First_Instance.primary_network_interface_id
 }
 
+resource "aws_network_interface_sg_attachment" "connection_to_apache" {
+  security_group_id = aws_security_group.SG_Honey.id
+  network_interface_id = aws_instance.apache_instance.primary_network_interface_id
+}
 
   provider "aws" {
   region = var.region
