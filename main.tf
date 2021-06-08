@@ -14,9 +14,9 @@ resource "aws_instance" "First_Instance" {
 resource "aws_security_group" "SG_Honey" {
  name = "SG_Honey"  
 
- lifecycle {
-   create_before_destroy = true
- }
+#  lifecycle {
+#    create_before_destroy = true
+#  }
 
  ingress {
     cidr_blocks = [ "99.227.118.13/32" ]
