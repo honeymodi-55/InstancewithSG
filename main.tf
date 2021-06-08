@@ -38,18 +38,18 @@ resource "aws_security_group" "SG_Honey" {
 }
 
 #resource for creating a Storage S3 Bucket
-resource "aws_s3_bucket" "Bucket1" {
-  bucket = "honeys-terraform-bucket"
-  acl = "private"
+# resource "aws_s3_bucket" "Bucket1" {
+#   bucket = "honeys-terraform-bucket"
+#   acl = "private"
 
-  tags = {
-    Name = "terraform-honey"
-  }
+#   tags = {
+#     Name = "terraform-honey"
+#   }
 
-  versioning {
-    enabled = true
-  }
-}
+#   versioning {
+#     enabled = true
+#   }
+# }
 
 #creating a connection between the security group and instance
 # resource "aws_network_interface_sg_attachment" "ConnectiontoSG" {
