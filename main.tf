@@ -13,7 +13,7 @@ resource "aws_instance" "apache_instance" {
   ami = "ami-0277fbe7afa8a33a6"
   instance_type = "t2.micro"
   key_name = "trail-key"
-  security_groups = [ "${aws_security_group.SG_Honey.id}" ]
+  security_groups = [ "${aws_security_group.SG_Honey.name}" ]
   tags = {
       Name = "apache"
       }
