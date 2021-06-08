@@ -51,6 +51,15 @@ resource "aws_security_group_rule" "port_22_rule" {
   security_group_id = aws_security_group.SG_Honey.id  #destiantion
 }
 
+resource "aws_security_group_rule" "port_80_rule" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks = ["99.227.118.13/32"]
+  security_group_id = aws_security_group.SG_Honey.id  #destiantion
+}
+
 #resource for creating a Storage S3 Bucket
 resource "aws_s3_bucket" "Bucket1" {
   bucket = "honeys-terraform-bucket"
