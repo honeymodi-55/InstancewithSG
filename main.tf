@@ -46,10 +46,10 @@ resource "aws_s3_bucket" "Bucket1" {
 }
 
 #creating a connection between the security group and instance
-resource "aws_network_interface_sg_attachment" "ConnectiontoSG" {
-  security_group_id = aws_security_group.SG_Honey.id
-  network_interface_id = aws_instance.First_Instance.primary_network_interface_id
-}
+# resource "aws_network_interface_sg_attachment" "ConnectiontoSG" {
+#   security_group_id = aws_security_group.SG_Honey.id
+#   network_interface_id = aws_instance.First_Instance.primary_network_interface_id
+# }
 
 
   provider "aws" {
