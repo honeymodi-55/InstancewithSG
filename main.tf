@@ -47,7 +47,7 @@ resource "aws_security_group_rule" "port_22_rule" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  security_groups      = ["sg-04467a714596c39ed"] #source security group
+  source_security_group_id = "sg-04467a714596c39ed" #source security group
   security_group_id = aws_security_group.SG_Honey.id  #destiantion
 }
 
