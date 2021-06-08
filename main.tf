@@ -36,7 +36,7 @@ resource "aws_security_group" "SG_Honey" {
   }  
 }
 
-resource for creating a Storage S3 Bucket
+#resource for creating a Storage S3 Bucket
 resource "aws_s3_bucket" "Bucket1" {
   bucket = "honeys-terraform-bucket"
   acl = "private"
